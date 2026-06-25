@@ -19,15 +19,30 @@ function initNavbar() {
   const navbar = document.querySelector('.navbar');
   if (!navbar) return;
 
+  let lastScrollY = window.scrollY;
+
   const onScroll = () => {
-    // Hide navbar when scrolled down, only show it at the very top of the page
-    if (window.scrollY > 80) {
-      navbar.classList.add('nav-hidden');
+    const currentScrollY = window.scrollY;
+
+    // Add scrolled class when scrolling past 40px
+    if (currentScrollY > 40) {
       navbar.classList.add('scrolled');
     } else {
-      navbar.classList.remove('nav-hidden');
       navbar.classList.remove('scrolled');
     }
+
+    // Smart navbar: hide on scroll down, show on scroll up (only if scrolled past 150px)
+    if (currentScrollY > 150) {
+      if (currentScrollY > lastScrollY) {
+        navbar.classList.add('nav-hidden');
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+    } else {
+      navbar.classList.remove('nav-hidden');
+    }
+
+    lastScrollY = currentScrollY;
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
