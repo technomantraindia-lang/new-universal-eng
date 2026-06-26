@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollHighlight();
   initProductModal();
   initVerticalTabs();
+  init3DTilt();
+  initInteractiveOrgChart();
+  initProductShowcase();
 });
 
 /* Navbar scroll effect */
@@ -315,6 +318,213 @@ function initVerticalTabs() {
       targetPanel.classList.add('active');
     });
   });
+}
+
+/* 3D Tilt effect for cards */
+function init3DTilt() {
+  const cards = document.querySelectorAll('.tilt-card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const max = parseFloat(card.dataset.tiltMax) || 10;
+    const speed = parseFloat(card.dataset.tiltSpeed) || 300;
+
+    card.style.transition = `transform ${speed}ms cubic-bezier(0.16, 1, 0.3, 1)`;
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((centerY - y) / centerY) * max;
+      const rotateY = ((x - centerX) / centerX) * max;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+}
+
+/* Interactive Org Chart */
+function initInteractiveOrgChart() {
+  const nodes = document.querySelectorAll('.org-node');
+  const roleName = document.getElementById('org-role-name');
+  const roleDept = document.getElementById('org-role-dept');
+  const roleDesc = document.getElementById('org-role-desc');
+  const roleDuties = document.getElementById('org-role-duties');
+
+  if (!nodes.length || !roleName || !roleDept || !roleDesc || !roleDuties) return;
+
+  const data = {
+    md: {
+      name: "Managing Director",
+      dept: "Executive Management",
+      desc: "Directs the company's long-term business roadmap, oversees safety protocol compliance, and manages core partnerships with global MNC engineering clients. Guides the operational strategy with commitment, precision, and trust.",
+      duties: [
+        "Visionary planning & business scaling across India.",
+        "MNC Client alignment and compliance oversight.",
+        "Overall corporate governance, safety policy mandate."
+      ]
+    },
+    ops: {
+      name: "Operations Head",
+      dept: "Project Executions",
+      desc: "Coordinates project execution timelines, oversees fabrication operations, directs technical site layouts, and manages site supervisors to ensure on-time delivery with zero error.",
+      duties: [
+        "Manage fabrication logistics & resources.",
+        "On-Site coordination of turnkey execution teams.",
+        "Timeline management and project commissioning."
+      ]
+    },
+    tech: {
+      name: "Technical Head",
+      dept: "Engineering & Standards",
+      desc: "Supervises QA/QC engineers, validates weld procedures and standard certifications, conducts testing protocol reviews, and resolves complex mechanical piping challenges.",
+      duties: [
+        "Review hydro-testing and NDT reports.",
+        "Oversee QA/QC pipeline compliance.",
+        "Research material grade suitability & certifications."
+      ]
+    },
+    store: {
+      name: "Store & Procurement",
+      dept: "Inventory Management",
+      desc: "Manages raw material inventories, procures structural pipes, flanges, fittings, and valves, verifies dispatch inspection files, and handles vendor communication.",
+      duties: [
+        "Maintain inventory levels for quick dispatch.",
+        "Verify mill test certificates.",
+        "Manage logistics for on-site material supply."
+      ]
+    },
+    supervisors: {
+      name: "Site Supervisors",
+      dept: "Field Operations",
+      desc: "Manages day-to-day site installation tasks, coordinates direct labor, enforces rigorous safety protocol adherence, and keeps operations on track.",
+      duties: [
+        "On-site daily execution management.",
+        "Enforce field safety rules (zero accidents).",
+        "Coordinate between operations and fabricators."
+      ]
+    },
+    qaqc: {
+      name: "QA/QC Engineer",
+      dept: "Testing & Compliance",
+      desc: "Performs rigorous hydro-testing, pneumatic checks, ultrasonic examinations, and dye-penetrant checks on joints, producing full quality reports.",
+      duties: [
+        "Run NDT (UT, DPT) testing procedures.",
+        "Issue compliance reports & test certificates.",
+        "Perform inspection checks on raw materials."
+      ]
+    },
+    welders: {
+      name: "Fabricators & Welders",
+      dept: "Execution Workforce",
+      desc: "Highly skilled, qualified technicians executing Arc, TIG, and MIG welding procedures, structural piping alignments, and mechanical fabrication.",
+      duties: [
+        "Execute qualified ASME standard welds.",
+        "Precisely shape, cut, and fit pipes.",
+        "Erect steel structural support frames."
+      ]
+    }
+  };
+
+  nodes.forEach((node) => {
+    node.addEventListener('click', () => {
+      const role = node.dataset.role;
+      if (!data[role]) return;
+
+      // Update active state
+      nodes.forEach((n) => n.classList.remove('active'));
+      node.classList.add('active');
+
+      // Animate card glow
+      const detailCard = document.getElementById('org-detail-card');
+      if (detailCard) {
+        detailCard.style.transform = 'perspective(1000px) scale(0.97)';
+        detailCard.style.opacity = '0.7';
+        setTimeout(() => {
+          detailCard.style.transform = '';
+          detailCard.style.opacity = '1';
+        }, 150);
+      }
+
+      // Update text
+      roleName.textContent = data[role].name;
+      roleDept.textContent = data[role].dept;
+      roleDesc.textContent = data[role].desc;
+
+      // Update duties list
+      roleDuties.innerHTML = '';
+      data[role].duties.forEach((duty) => {
+        const li = document.createElement('li');
+        li.textContent = duty;
+        roleDuties.appendChild(li);
+      });
+    });
+  });
+}
+
+/* Auto-cycling Interactive Product Showcase Slider */
+function initProductShowcase() {
+  const slides = document.querySelectorAll('.showcase-slide');
+  const dots = document.querySelectorAll('.showcase-dot');
+  const progressBar = document.querySelector('.showcase-progress-bar');
+  if (!slides.length || !dots.length) return;
+
+  let currentIdx = 0;
+  let intervalId = null;
+  const cycleTime = 4000; // 4 seconds
+
+  const showSlide = (index) => {
+    slides.forEach((slide) => slide.classList.remove('active'));
+    dots.forEach((dot) => dot.classList.remove('active'));
+
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+
+    // Reset progress bar animation
+    if (progressBar) {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      // Trigger reflow to restart transition
+      progressBar.offsetHeight; 
+      progressBar.style.transition = `width ${cycleTime}ms linear`;
+      progressBar.style.width = '100%';
+    }
+  };
+
+  const nextSlide = () => {
+    currentIdx = (currentIdx + 1) % slides.length;
+    showSlide(currentIdx);
+  };
+
+  const startInterval = () => {
+    intervalId = setInterval(nextSlide, cycleTime);
+  };
+
+  const stopInterval = () => {
+    if (intervalId) clearInterval(intervalId);
+  };
+
+  // Click handler for dot navigation
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      stopInterval();
+      currentIdx = idx;
+      showSlide(currentIdx);
+      startInterval();
+    });
+  });
+
+  // Start cycling
+  showSlide(currentIdx);
+  startInterval();
 }
 
 
