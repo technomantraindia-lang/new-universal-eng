@@ -688,3 +688,108 @@
     padding: 20px;
   }
 }
+
+/* ---- Product Categories Tabs Adjustments ---- */
+.tabs-navigation {
+  margin-top: -10px;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 5;
+}
+
+.tabs-navigation .tab-btn {
+  font-size: 0.95rem;
+  padding: 12px 30px;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tabs-navigation .tab-btn.active {
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 8px 24px rgba(226, 7, 20, 0.3);
+}
+
+/* Category Selection Page Styles */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.category-card {
+  background: rgba(16, 16, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(226, 7, 20, 0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(226, 7, 20, 0.15);
+}
+
+.category-card-img {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(226, 7, 20, 0.05) 0%, transparent 80%);
+}
+
+.category-card img {
+  max-height: 160px;
+  max-width: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
+  transition: transform 0.5s ease;
+}
+
+.category-card:hover img {
+  transform: scale(1.06);
+}
+
+.category-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.category-card-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.category-card-body p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.category-card-body .btn {
+  align-self: flex-start;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
