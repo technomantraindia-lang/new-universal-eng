@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="About Universal Engineering & Solution. 29+ Years of Excellence connecting turnkey industrial pipelines with precision, standard compliance, and zero leak reliability across India and globally.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>About Us | Universal Engineering & Solution</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260629">
+  <link rel="stylesheet" href="css/about-sections.css?v=20260629">
   <link rel="icon" href="image/videp/logo.png" type="image/png">
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=20260714" defer></script>
 </head>
 <body class="about-page-body">
 
@@ -27,15 +31,15 @@
       <ul class="nav-links">
         <li><a href="index.html#home">Home</a></li>
         <li><a href="about.html" class="active">About</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#brands">Products</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="contact.html">Contact</a></li>
         <li class="mobile-cta-item"><a href="tel:+919067610118" class="btn btn-outline">Call Now</a></li>
-        <li class="mobile-cta-item"><a href="index.html#contact" class="btn btn-primary">Get Quote</a></li>
+        <li class="mobile-cta-item"><a href="contact.html" class="btn btn-primary">Get Quote</a></li>
       </ul>
       <div class="nav-cta">
         <a href="tel:+919067610118" class="btn btn-outline">Call Now</a>
-        <a href="index.html#contact" class="btn btn-primary">Get Quote</a>
+        <a href="contact.html" class="btn btn-primary">Get Quote</a>
       </div>
       <button class="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -46,20 +50,84 @@
   <!-- About Hero -->
   <section class="about-hero">
     <div class="about-hero-bg">
-      <img src="image/videp/about_banner.png" alt="Industrial piping network" class="about-hero-img">
+      <video autoplay loop muted playsinline class="about-hero-video" aria-hidden="true">
+        <source src="image/videp/final banner.mp4" type="video/mp4">
+      </video>
+      <div class="about-hero-bg-shade" aria-hidden="true"></div>
     </div>
     <div class="about-hero-overlay"></div>
-    <div class="about-hero-grid-lines"></div>
+    <div class="about-hero-accent-line" aria-hidden="true"></div>
     <div class="container about-hero-container">
-      <div class="about-hero-content tilt-card" data-tilt-speed="400" data-tilt-max="15">
-        <span class="section-label">Legacy & Excellence</span>
-        <h1 class="about-hero-title">Universal Engineering <br><span>&amp; Solutions</span></h1>
-        <p class="about-hero-subtitle">The Company Piping Engineers Call Home. Bringing Turnkey Piping Solutions Under One Roof.</p>
-        <div class="about-hero-badges">
-          <span class="hero-badge"><span class="badge-dot"></span>Est. 1996</span>
-          <span class="hero-badge"><span class="badge-dot"></span>EPC & Engineering</span>
-          <span class="hero-badge"><span class="badge-dot"></span>Ankleshwar Hub</span>
+      <div class="about-hero-grid">
+
+        <!-- Left: Brand & Message -->
+        <div class="about-hero-content">
+          <span class="section-label">Legacy &amp; Excellence</span>
+          <h1 class="about-hero-title">Universal Engineering <br><span>&amp; Solutions</span></h1>
+          <p class="about-hero-subtitle">The Company Piping Engineers Call Home. Bringing Turnkey Piping Solutions Under One Roof.</p>
+          <div class="about-hero-badges">
+            <span class="hero-badge"><span class="badge-dot"></span>Est. 1996</span>
+            <span class="hero-badge"><span class="badge-dot"></span>EPC &amp; Engineering</span>
+            <span class="hero-badge"><span class="badge-dot"></span>Ankleshwar Hub</span>
+          </div>
         </div>
+
+        <!-- Right: Product Carousel -->
+        <div class="about-hero-showcase" id="about-hero-carousel">
+          <div class="hero-product-panel">
+            <div class="hero-product-header">
+              <span class="hero-product-label">Our Products</span>
+              <span class="hero-carousel-counter" id="hero-carousel-counter">01 / 08</span>
+            </div>
+
+            <div class="hero-product-viewport">
+              <div class="hero-carousel-stage">
+                <div class="hero-carousel-slide active" data-title="MS Pipes &amp; Fittings" data-category="Mild Steel">
+                  <img src="image/videp/MS Pipes &amp; Fittings.png" alt="MS Pipes and Fittings">
+                </div>
+                <div class="hero-carousel-slide" data-title="Stainless Steel Pipes" data-category="SS 304 / 316">
+                  <img src="image/videp/Stainless Steel Pipes &amp; Fittings.png" alt="Stainless Steel Pipes and Fittings">
+                </div>
+                <div class="hero-carousel-slide" data-title="PP / HDPE Systems" data-category="Thermoplastic">
+                  <img src="image/videp/PP .png" alt="PP HDPE UPVC Systems">
+                </div>
+                <div class="hero-carousel-slide" data-title="Gaskets &amp; Seals" data-category="Sealing Elements">
+                  <img src="image/videp/Gaskets &amp; Sealing Elements.png" alt="Gaskets and Sealing Elements">
+                </div>
+                <div class="hero-carousel-slide" data-title="Pipes &amp; Tubes" data-category="Industrial Supply">
+                  <img src="image/videp/prodcut image/pipe and tubes.png" alt="Pipes and Tubes">
+                </div>
+                <div class="hero-carousel-slide" data-title="Buttweld Fittings" data-category="Fabrication">
+                  <img src="image/videp/prodcut image/buttweld.png" alt="Buttweld Fittings">
+                </div>
+                <div class="hero-carousel-slide" data-title="Industrial Flanges" data-category="WNRF / SORF">
+                  <img src="image/videp/prodcut image/flanges.png" alt="Industrial Flanges">
+                </div>
+                <div class="hero-carousel-slide" data-title="Forged Fittings" data-category="High Pressure">
+                  <img src="image/videp/prodcut image/Forged &amp; Ferrule Fittings.png" alt="Forged and Ferrule Fittings">
+                </div>
+              </div>
+              <button class="hero-carousel-btn hero-carousel-prev" type="button" aria-label="Previous product">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button class="hero-carousel-btn hero-carousel-next" type="button" aria-label="Next product">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+
+            <div class="hero-product-meta">
+              <span class="hero-caption-cat" id="hero-caption-cat">Mild Steel</span>
+              <span class="hero-caption-title" id="hero-caption-title">MS Pipes &amp; Fittings</span>
+            </div>
+
+            <div class="hero-thumb-strip" id="hero-thumb-strip"></div>
+
+            <div class="hero-carousel-progress">
+              <div class="hero-carousel-progress-bar" id="hero-carousel-progress"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -75,32 +143,36 @@
         <p class="legacy-lead">A track record that makes us the go-to choice for trusted EPC &amp; Engineering companies across India.</p>
         
         <div class="legacy-stats-container">
-          <div class="legacy-stat-card">
-            <div class="stat-ring-box">
-              <svg class="stat-ring" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent"/>
-                <circle cx="50" cy="50" r="42" stroke="var(--red)" stroke-width="8" fill="transparent" stroke-dasharray="264" stroke-dashoffset="30" class="ring-fill"/>
-              </svg>
-              <span class="stat-number" data-count="29" data-suffix="+">0</span>
+          <div class="legacy-stat-card legacy-stat-years">
+            <div class="legacy-stat-inner">
+              <div class="stat-ring-box">
+                <svg class="stat-ring" viewBox="0 0 100 100" aria-hidden="true">
+                  <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.06)" stroke-width="7" fill="transparent"/>
+                  <circle cx="50" cy="50" r="42" stroke="var(--red)" stroke-width="7" fill="transparent" stroke-dasharray="264" stroke-dashoffset="30" class="ring-fill"/>
+                </svg>
+                <span class="stat-number" data-count="29" data-suffix="+">0</span>
+              </div>
+              <span class="stat-label">Years of Excellence</span>
             </div>
-            <span class="stat-label">Years of Excellence</span>
           </div>
 
-          <div class="legacy-stat-card">
-            <div class="stat-ring-box">
-              <svg class="stat-ring" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent"/>
-                <circle cx="50" cy="50" r="42" stroke="#00E676" stroke-width="8" fill="transparent" stroke-dasharray="264" stroke-dashoffset="250" class="ring-fill"/>
-              </svg>
-              <span class="stat-number" data-count="1" data-prefix="&lt;" data-suffix="%">0</span>
+          <div class="legacy-stat-card legacy-stat-error">
+            <div class="legacy-stat-inner">
+              <div class="stat-ring-box">
+                <svg class="stat-ring" viewBox="0 0 100 100" aria-hidden="true">
+                  <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.06)" stroke-width="7" fill="transparent"/>
+                  <circle cx="50" cy="50" r="42" stroke="#00E676" stroke-width="7" fill="transparent" stroke-dasharray="264" stroke-dashoffset="250" class="ring-fill ring-fill-green"/>
+                </svg>
+                <span class="stat-number" data-count="1" data-prefix="&lt;" data-suffix="%">0</span>
+              </div>
+              <span class="stat-label">Error Rate</span>
             </div>
-            <span class="stat-label">Error Rate</span>
           </div>
         </div>
       </div>
 
       <div class="legacy-image-container reveal-right">
-        <div class="tilt-card glass-wrapper product-showcase-wrapper" data-tilt-max="8">
+        <div class="glass-wrapper product-showcase-wrapper legacy-product-panel">
           <div class="glass-header">
             <span class="glass-dot red-dot"></span>
             <span class="glass-dot yellow-dot"></span>
@@ -186,8 +258,11 @@
       <div class="pipeline-container">
         <svg class="pipeline-svg" viewBox="0 0 1240 620" aria-hidden="true">
           <path class="pipeline-road" d="M 90,120 L 1045,120 A 95,95 0 0,1 1045,310 L 195,310 A 95,95 0 0,0 195,500 L 1150,500" />
+          <path class="pipeline-road pipeline-road-branch" d="M 672,500 L 672,538" />
           <path class="pipeline-flow" d="M 90,120 L 1045,120 A 95,95 0 0,1 1045,310 L 195,310 A 95,95 0 0,0 195,500 L 1150,500" />
+          <path class="pipeline-flow pipeline-flow-branch" d="M 672,500 L 672,538" />
           <path class="pipeline-liquid" d="M 90,120 L 1045,120 A 95,95 0 0,1 1045,310 L 195,310 A 95,95 0 0,0 195,500 L 1150,500" />
+          <path class="pipeline-liquid pipeline-liquid-branch" d="M 672,500 L 672,538" />
         </svg>
 
         <div class="pipeline-stages">
@@ -209,31 +284,31 @@
             <div class="pipeline-dot" title="Innovation"></div>
           </article>
 
-          <article class="pipeline-stage stage-bottom" style="--x: 31%; --y: 50%;">
+          <article class="pipeline-stage stage-bottom stage-on-line" style="--x: 31%; --y: 50%;">
             <div class="pipeline-card">
               <span class="pipeline-count">03</span>
               <h3 class="pipeline-label">Customer-Centric</h3>
               <p class="pipeline-desc">Tailoring Layouts to Your Real-Time Constraints</p>
             </div>
-            <div class="pipeline-dot" title="Customer-Centric"></div>
+            <div class="pipeline-dot" title="Customer-Centric" aria-hidden="true"></div>
           </article>
 
-          <article class="pipeline-stage stage-bottom" style="--x: 69%; --y: 50%;">
+          <article class="pipeline-stage stage-bottom stage-on-line" style="--x: 69%; --y: 50%;">
             <div class="pipeline-card">
               <span class="pipeline-count">04</span>
               <h3 class="pipeline-label">Reliability</h3>
               <p class="pipeline-desc">Zero Leakage Guarantee &amp; Quality Certifications</p>
             </div>
-            <div class="pipeline-dot" title="Reliability"></div>
+            <div class="pipeline-dot" title="Reliability" aria-hidden="true"></div>
           </article>
 
-          <article class="pipeline-stage stage-top stage-center" style="--x: 50%; --y: 75%;">
+          <article class="pipeline-stage stage-bottom stage-center" style="--x: 54.2%; --y: 80.65%;">
+            <div class="pipeline-dot" title="End-to-End Support"></div>
             <div class="pipeline-card">
               <span class="pipeline-count">05</span>
               <h3 class="pipeline-label">End-to-End Support</h3>
               <p class="pipeline-desc">From Grassroots Commissioning to Maintenance Shutdowns</p>
             </div>
-            <div class="pipeline-dot" title="End-to-End Support"></div>
           </article>
         </div>
       </div>
@@ -253,10 +328,13 @@
         <div class="org-tree-container reveal-left">
           <div class="org-tree">
             
-            <!-- Level 1 (MD) -->
-            <div class="org-level level-1">
-              <button class="org-node active" data-role="md">
+            <!-- Root: Managing Director -->
+            <div class="org-tier org-tier-root">
+              <button class="org-node org-node-root active" data-role="md" type="button">
                 <div class="node-glow"></div>
+                <span class="node-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                </span>
                 <div class="node-content">
                   <span class="node-title">Managing Director</span>
                   <span class="node-name">Executive Office</span>
@@ -264,68 +342,92 @@
               </button>
             </div>
 
-            <!-- Vertical Connector line -->
-            <div class="org-connector-vertical"></div>
-
-            <!-- Level 2 (Heads) -->
-            <div class="org-level level-2">
-              <button class="org-node" data-role="ops">
-                <div class="node-glow"></div>
-                <div class="node-content">
-                  <span class="node-title">Operations Head</span>
-                  <span class="node-name">Project Executions</span>
-                </div>
-              </button>
-
-              <button class="org-node" data-role="tech">
-                <div class="node-glow"></div>
-                <div class="node-content">
-                  <span class="node-title">Technical Head</span>
-                  <span class="node-name">Engineering &amp; Standards</span>
-                </div>
-              </button>
-
-              <button class="org-node" data-role="store">
-                <div class="node-glow"></div>
-                <div class="node-content">
-                  <span class="node-title">Store &amp; Procurement</span>
-                  <span class="node-name">Inventory Management</span>
-                </div>
-              </button>
+            <!-- Main trunk: stem + horizontal rail -->
+            <div class="org-tier org-tier-trunk" aria-hidden="true">
+              <div class="org-trunk-stem"></div>
+              <div class="org-trunk-rail">
+                <span class="org-junction org-junction-left"></span>
+                <span class="org-junction org-junction-center"></span>
+                <span class="org-junction org-junction-right"></span>
+              </div>
             </div>
 
-            <div class="org-connector-multi">
-              <svg viewBox="0 0 800 60" class="connector-svg" preserveAspectRatio="none">
-                <path d="M133,0 L133,30 L666,30 L666,0 M400,0 L400,60" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
-                <path d="M133,0 L133,30 L666,30 L666,0 M400,0 L400,60" fill="none" stroke="var(--red)" stroke-width="2" class="connector-flow-path"/>
-              </svg>
-            </div>
+            <!-- Three columns with vertical connectors -->
+            <div class="org-tier org-tier-columns">
+              <div class="org-column">
+                <div class="org-col-drop" aria-hidden="true"></div>
+                <button class="org-node" data-role="ops" type="button">
+                  <div class="node-glow"></div>
+                  <span class="node-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/></svg>
+                  </span>
+                  <div class="node-content">
+                    <span class="node-title">Operations Head</span>
+                    <span class="node-name">Project Executions</span>
+                  </div>
+                </button>
+                <div class="org-col-link" aria-hidden="true"><span class="org-junction org-junction-mid"></span></div>
+                <button class="org-node" data-role="supervisors" type="button">
+                  <div class="node-glow"></div>
+                  <span class="node-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M3 20c0-3 2.7-5 6-5M13 20c0-2.5 2-4 5-4"/></svg>
+                  </span>
+                  <div class="node-content">
+                    <span class="node-title">Site Supervisors</span>
+                    <span class="node-name">Field Operations</span>
+                  </div>
+                </button>
+              </div>
 
-            <!-- Level 3 (Field Execution) -->
-            <div class="org-level level-3">
-              <button class="org-node" data-role="supervisors">
-                <div class="node-glow"></div>
-                <div class="node-content">
-                  <span class="node-title">Site Supervisors</span>
-                  <span class="node-name">Field Operations</span>
-                </div>
-              </button>
+              <div class="org-column">
+                <div class="org-col-drop" aria-hidden="true"></div>
+                <button class="org-node" data-role="tech" type="button">
+                  <div class="node-glow"></div>
+                  <span class="node-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                  </span>
+                  <div class="node-content">
+                    <span class="node-title">Technical Head</span>
+                    <span class="node-name">Engineering &amp; Standards</span>
+                  </div>
+                </button>
+                <div class="org-col-link" aria-hidden="true"><span class="org-junction org-junction-mid"></span></div>
+                <button class="org-node" data-role="qaqc" type="button">
+                  <div class="node-glow"></div>
+                  <span class="node-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                  </span>
+                  <div class="node-content">
+                    <span class="node-title">QA/QC Engineer</span>
+                    <span class="node-name">Testing &amp; Compliance</span>
+                  </div>
+                </button>
+              </div>
 
-              <button class="org-node" data-role="qaqc">
-                <div class="node-glow"></div>
-                <div class="node-content">
-                  <span class="node-title">QA/QC Engineer</span>
-                  <span class="node-name">Testing &amp; Compliance</span>
-                </div>
-              </button>
-
-              <button class="org-node" data-role="welders">
-                <div class="node-glow"></div>
-                <div class="node-content">
-                  <span class="node-title">Fabricators &amp; Welders</span>
-                  <span class="node-name">Execution Workforce</span>
-                </div>
-              </button>
+              <div class="org-column">
+                <div class="org-col-drop" aria-hidden="true"></div>
+                <button class="org-node" data-role="store" type="button">
+                  <div class="node-glow"></div>
+                  <span class="node-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
+                  </span>
+                  <div class="node-content">
+                    <span class="node-title">Store &amp; Procurement</span>
+                    <span class="node-name">Inventory Management</span>
+                  </div>
+                </button>
+                <div class="org-col-link" aria-hidden="true"><span class="org-junction org-junction-mid"></span></div>
+                <button class="org-node" data-role="welders" type="button">
+                  <div class="node-glow"></div>
+                  <span class="node-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M8 7h8l-2 14H10L8 7z"/><path d="M10 11h4"/></svg>
+                  </span>
+                  <div class="node-content">
+                    <span class="node-title">Fabricators &amp; Welders</span>
+                    <span class="node-name">Execution Workforce</span>
+                  </div>
+                </button>
+              </div>
             </div>
 
           </div>
@@ -356,33 +458,46 @@
   </section>
 
   <!-- Director Message -->
-  <section class="director-message-section section-reveal section-reveal-right">
-    <div class="container director-grid-premium">
-      <div class="director-visual-col reveal-left">
-        <div class="director-bg-text">UES</div>
-        <div class="director-frame-premium tilt-card" data-tilt-max="8">
-          <div class="director-border-glow-outer"></div>
-          <div class="director-img-wrapper">
-            <img src="image/videp/owner iamge.png" alt="Managing Director">
+  <section class="director-section section-reveal section-reveal-right revealed" id="director-message">
+    <div class="container">
+      <div class="director-panel reveal visible">
+        <div class="director-panel-inner">
+          <div class="director-portrait reveal-left visible">
+            <div class="director-portrait-wrap">
+              <div class="director-portrait-img">
+                <img src="image/videp/owner iamge.png" alt="Managing Director">
+              </div>
+              <div class="director-portrait-badge">
+                <span class="director-portrait-role">Managing Director</span>
+              </div>
+            </div>
           </div>
-          <div class="director-badge-absolute">
-            <h5>Managing Director</h5>
-            <span>Universal Engineering</span>
-          </div>
-        </div>
-      </div>
-      <div class="director-info-col reveal-right">
-        <span class="section-label">Director's Message</span>
-        <p class="director-quote-premium">&ldquo;At Universal Engineering &amp; Solution, our journey has always been guided by commitment, precision, and trust. We believe true partnerships are built by understanding real challenges and delivering reliable solutions.&rdquo;</p>
-        <div class="director-meta-premium">
-          <div class="director-meta-text">
-            <h4>Universal Engineering &amp; Solution</h4>
-            <span>Managing Director Office</span>
-          </div>
-          <div class="director-pillars-row">
-            <span class="director-pillar-badge">Commitment</span>
-            <span class="director-pillar-badge">Precision</span>
-            <span class="director-pillar-badge">Trust</span>
+
+          <div class="director-content reveal-right visible">
+            <span class="section-label">Director's Message</span>
+            <h2 class="director-heading">A Word From <span>Leadership</span></h2>
+
+            <blockquote class="director-quote">
+              <p>&ldquo;At Universal Engineering &amp; Solution, our journey has always been guided by commitment, precision, and trust. We believe true partnerships are built by understanding real challenges and delivering reliable solutions.&rdquo;</p>
+            </blockquote>
+
+            <div class="director-pillars">
+              <div class="director-pillar-item">
+                <span class="director-pillar-num">01</span>
+                <span class="director-pillar-label">Commitment</span>
+              </div>
+              <div class="director-pillar-divider" aria-hidden="true"></div>
+              <div class="director-pillar-item">
+                <span class="director-pillar-num">02</span>
+                <span class="director-pillar-label">Precision</span>
+              </div>
+              <div class="director-pillar-divider" aria-hidden="true"></div>
+              <div class="director-pillar-item">
+                <span class="director-pillar-num">03</span>
+                <span class="director-pillar-label">Trust</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -390,48 +505,66 @@
   </section>
 
   <!-- Our Next 3 Moves (Vision) -->
-  <section class="about-vision section-reveal section-reveal-bottom">
+  <section class="roadmap-section section-reveal section-reveal-bottom revealed" id="future-roadmap">
     <div class="container">
-      <div class="reveal" style="text-align: center; margin-bottom: 60px;">
+      <div class="roadmap-header reveal visible">
         <span class="section-label" style="justify-content: center;">Future Roadmap</span>
-        <h2 class="section-title">Our Next <span>3 Moves</span></h2>
-        <p class="section-desc" style="margin: 0 auto;">We do business to meet our clients' needs, not just to hit our targets. We grow through solving problems.</p>
+        <h2 class="section-title" style="text-align: center;">Our Next <span>3 Moves</span></h2>
+        <p class="section-desc" style="margin: 0 auto; text-align: center;">We do business to meet our clients' needs, not just to hit our targets. We grow through solving problems.</p>
       </div>
 
-      <div class="vision-grid stagger-children">
-        
-        <div class="vision-card tilt-card reveal" data-tilt-max="10">
-          <div class="vision-bg" style="background-image: url('image/videp/360° Piping EPC Company .png');"></div>
-          <div class="vision-overlay"></div>
-          <div class="vision-content">
-            <span class="vision-number">01</span>
-            <h3>360&deg; Piping EPC Company</h3>
-            <p>From Design to Supply to Erection &amp; Commissioning. With an in-house team of mechanical experts, we have evolved into a 360 Piping solution company—covering design, supply, erection, and commissioning under one roof. We are poised to become your next turnkey partners.</p>
-          </div>
+      <div class="roadmap-track-wrap">
+        <div class="roadmap-connector" aria-hidden="true">
+          <span class="roadmap-connector-line"></span>
+          <span class="roadmap-connector-dot"></span>
+          <span class="roadmap-connector-dot"></span>
+          <span class="roadmap-connector-dot"></span>
         </div>
 
-        <div class="vision-card tilt-card reveal" data-tilt-max="10">
-          <div class="vision-bg" style="background-image: url('image/videp/Greenfield Projects.png');"></div>
-          <div class="vision-overlay"></div>
-          <div class="vision-content">
-            <span class="vision-number">02</span>
-            <h3>Greenfield Projects</h3>
-            <p>From ground up to expansion, we will do it all. Backed by partnerships with leading experts across piping, structure, electrical, and insulation, we are equipped to execute turnkey Greenfield &amp; Brownfield Projects. Whether setting up a plant from scratch or expanding an existing hub.</p>
+        <div class="roadmap-track">
+        <article class="roadmap-step tilt-card visible" data-tilt-max="6">
+          <div class="roadmap-step-badge">01</div>
+          <div class="roadmap-step-card">
+            <div class="roadmap-step-media">
+              <img src="image/videp/360° Piping EPC Company .png" alt="360° Piping EPC Company">
+              <div class="roadmap-step-media-overlay"></div>
+            </div>
+            <div class="roadmap-step-body">
+              <h3>360&deg; Piping EPC Company</h3>
+              <p>From Design to Supply to Erection &amp; Commissioning. With an in-house team of mechanical experts, we have evolved into a 360 Piping solution company—covering design, supply, erection, and commissioning under one roof. We are poised to become your next turnkey partners.</p>
+            </div>
           </div>
-        </div>
+        </article>
 
-        <div class="vision-card tilt-card reveal" data-tilt-max="10">
-          <div class="vision-bg" style="background-image: url('image/videp/Preventive Maintenance.png');"></div>
-          <div class="vision-overlay"></div>
-          <div class="vision-content">
-            <span class="vision-number">03</span>
-            <h3>Preventive Maintenance</h3>
-            <p>For Valves, Pipes &amp; Pipe fittings. Because we understand our products deeply, we also understand how to prolong their lifespan. Our preventive maintenance division helps restore aging piping systems to peak performance. We protect the old networks that still have life.</p>
+        <article class="roadmap-step tilt-card visible" data-tilt-max="6">
+          <div class="roadmap-step-badge">02</div>
+          <div class="roadmap-step-card">
+            <div class="roadmap-step-media">
+              <img src="image/videp/Greenfield Projects.png" alt="Greenfield Projects">
+              <div class="roadmap-step-media-overlay"></div>
+            </div>
+            <div class="roadmap-step-body">
+              <h3>Greenfield Projects</h3>
+              <p>From ground up to expansion, we will do it all. Backed by partnerships with leading experts across piping, structure, electrical, and insulation, we are equipped to execute turnkey Greenfield &amp; Brownfield Projects. Whether setting up a plant from scratch or expanding an existing hub.</p>
+            </div>
           </div>
-        </div>
+        </article>
 
+        <article class="roadmap-step tilt-card visible" data-tilt-max="6">
+          <div class="roadmap-step-badge">03</div>
+          <div class="roadmap-step-card">
+            <div class="roadmap-step-media">
+              <img src="image/videp/Preventive Maintenance.png" alt="Preventive Maintenance">
+              <div class="roadmap-step-media-overlay"></div>
+            </div>
+            <div class="roadmap-step-body">
+              <h3>Preventive Maintenance</h3>
+              <p>For Valves, Pipes &amp; Pipe fittings. Because we understand our products deeply, we also understand how to prolong their lifespan. Our preventive maintenance division helps restore aging piping systems to peak performance. We protect the old networks that still have life.</p>
+            </div>
+          </div>
+        </article>
+        </div>
       </div>
-
     </div>
   </section>
 
@@ -491,8 +624,7 @@
       </div>
       
       <div class="contact-grid">
-        <div class="reveal-left contact-info-card tilt-card" data-tilt-max="8">
-          <div class="org-card-glow"></div>
+        <div class="reveal-left contact-info-card">
           <h3 class="contact-inquire-title"><span>&mdash;</span> Inquire Now</h3>
           <h4 class="contact-inquire-subtitle">Share your needs, we'll guide you.</h4>
           <p class="contact-inquire-desc">Share piping specifications, steel grades, sizes, and quantity. We will help you choose the right industrial engineering solution.</p>
@@ -595,9 +727,9 @@
         <ul>
           <li><a href="index.html#home">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#brands">Products</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-links-col">

@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   init3DTilt();
   initInteractiveOrgChart();
   initProductShowcase();
+  initAboutHeroCarousel();
+  initServicesPage();
+  initContactPage();
 });
 
 /* Navbar scroll effect */
@@ -86,6 +89,17 @@ function initReveal() {
     );
     sections.forEach((sec) => sectionObserver.observe(sec));
   }
+
+  // About page: ensure director & roadmap sections are always visible
+  document.querySelectorAll('.director-section, .roadmap-section').forEach((el) => {
+    el.classList.add('revealed');
+  });
+  document.querySelectorAll(
+    '.director-section .reveal, .director-section .reveal-left, .director-section .reveal-right, ' +
+    '.roadmap-section .reveal, .roadmap-section .reveal-left, .roadmap-section .reveal-right'
+  ).forEach((el) => {
+    el.classList.add('visible');
+  });
 }
 
 /* Animated counters */
@@ -470,6 +484,97 @@ function initInteractiveOrgChart() {
   });
 }
 
+/* About page hero — product image carousel */
+function initAboutHeroCarousel() {
+  const carousel = document.getElementById('about-hero-carousel');
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll('.hero-carousel-slide');
+  const thumbStrip = document.getElementById('hero-thumb-strip');
+  const captionCat = document.getElementById('hero-caption-cat');
+  const captionTitle = document.getElementById('hero-caption-title');
+  const counter = document.getElementById('hero-carousel-counter');
+  const progressBar = document.getElementById('hero-carousel-progress');
+  const prevBtn = carousel.querySelector('.hero-carousel-prev');
+  const nextBtn = carousel.querySelector('.hero-carousel-next');
+
+  if (!slides.length || !thumbStrip) return;
+
+  const total = slides.length;
+  let current = 0;
+  let intervalId = null;
+  const cycleMs = 4500;
+
+  slides.forEach((slide, i) => {
+    const img = slide.querySelector('img');
+    const thumb = document.createElement('button');
+    thumb.type = 'button';
+    thumb.className = 'hero-thumb-btn' + (i === 0 ? ' active' : '');
+    thumb.setAttribute('aria-label', slide.dataset.title || 'Product ' + (i + 1));
+    if (img) {
+      const thumbImg = document.createElement('img');
+      thumbImg.src = img.src;
+      thumbImg.alt = '';
+      thumb.appendChild(thumbImg);
+    }
+    thumb.addEventListener('click', () => goTo(i));
+    thumbStrip.appendChild(thumb);
+  });
+
+  const thumbs = thumbStrip.querySelectorAll('.hero-thumb-btn');
+
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function updateSlides() {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === current);
+    });
+
+    thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === current));
+
+    const active = slides[current];
+    if (captionCat) captionCat.textContent = active.dataset.category || '';
+    if (captionTitle) captionTitle.textContent = active.dataset.title || '';
+    if (counter) counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  }
+
+  function resetProgress() {
+    if (!progressBar) return;
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    progressBar.offsetHeight;
+    progressBar.style.transition = 'width ' + cycleMs + 'ms linear';
+    progressBar.style.width = '100%';
+  }
+
+  function goTo(index) {
+    current = ((index % total) + total) % total;
+    updateSlides();
+    resetProgress();
+    restartAuto();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function restartAuto() {
+    clearInterval(intervalId);
+    intervalId = setInterval(next, cycleMs);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
+  carousel.addEventListener('mouseleave', restartAuto);
+
+  updateSlides();
+  resetProgress();
+  restartAuto();
+}
+
 /* Auto-cycling Interactive Product Showcase Slider */
 function initProductShowcase() {
   const slides = document.querySelectorAll('.showcase-slide');
@@ -527,4 +632,591 @@ function initProductShowcase() {
   startInterval();
 }
 
+/* Services page — banner carousel & service details */
+function initServicesPage() {
+  const banner = document.querySelector('.svc-banner');
+  if (banner) {
+    const bannerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            bannerObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    bannerObserver.observe(banner);
+    if (banner.getBoundingClientRect().top < window.innerHeight) {
+      banner.classList.add('revealed');
+    }
+  }
 
+  const catalog = document.querySelector('.svc-catalog');
+  if (catalog) {
+    const catalogObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            catalogObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    catalogObserver.observe(catalog);
+    if (catalog.getBoundingClientRect().top < window.innerHeight) {
+      catalog.classList.add('revealed');
+    }
+  }
+
+  initSvcHeroCarousel();
+  initSvcDetails();
+  initSvcModal();
+  initSvcPortfolioRail();
+}
+
+const SVC_DETAILS = {
+  'svc-01': {
+    num: '01',
+    title: 'Turnkey Piping Solutions',
+    image: 'image/videp/Piping Project Execution.png',
+    lead: 'Complete piping support — from planning and procurement through fabrication, installation, testing, and handover — delivered under one accountable partner so your plant moves from design intent to operational readiness without coordination gaps.',
+    scope: [
+      'Project planning, BOQ, and material take-off',
+      'MS, SS, and alloy pipe & fitting supply',
+      'Workshop and on-site fabrication',
+      'Installation, alignment, and support',
+      'Hydro / pneumatic testing & NDT',
+      'Documentation and commissioning handover'
+    ],
+    ideal: [
+      'New process lines and plant expansions',
+      'Owners seeking single-contract accountability',
+      'Fast-track industrial projects',
+      'Multi-system piping across plant zones'
+    ],
+    tags: ['Turnkey', 'End-to-End', 'Single Partner', 'Commissioning']
+  },
+  'svc-02': {
+    num: '02',
+    title: 'Brownfield Project Execution',
+    image: 'image/videp/Brownfield Project Execution.png',
+    lead: 'Expansion, modification, and live integration for existing plants — engineered to minimise downtime, protect running operations, and execute safely in congested, operational environments.',
+    scope: [
+      'Live plant tie-ins and retrofits',
+      'Shutdown and phased execution planning',
+      'Hot-work and permit-to-work coordination',
+      'Existing line isolation and flushing',
+      'Precision routing in constrained sites',
+      'Post-modification testing and recommissioning'
+    ],
+    ideal: [
+      'Operating refineries, chemical & pharma plants',
+      'Capacity expansion without greenfield land',
+      'Line modifications and debottlenecking',
+      'Shutdown-window critical work'
+    ],
+    tags: ['Brownfield', 'Expansion', 'Live Plant', 'Minimal Downtime']
+  },
+  'svc-03': {
+    num: '03',
+    title: 'Piping Project Execution',
+    image: 'image/videp/Piping Project Execution.png',
+    lead: 'End-to-end piping execution — network planning, supply, fabrication, and installation — executed under strict safety and mechanical codes with field teams that understand industrial tolerances.',
+    scope: [
+      'Routing, isometrics, and install planning',
+      'Pipe, valve, and fitting procurement',
+      'Field fabrication and erection',
+      'Welding per WPS / qualified procedures',
+      'NDT, pressure testing, and punch-list closure',
+      'As-built documentation and QA records'
+    ],
+    ideal: [
+      'EPC contractors needing execution partners',
+      'Process and utility piping networks',
+      'High-pressure and coded piping systems',
+      'Sites requiring certified field teams'
+    ],
+    tags: ['Fabrication', 'Installation', 'Field Execution', 'QA/QC']
+  },
+  'svc-04': {
+    num: '04',
+    title: '360° Piping EPC Services',
+    image: 'image/videp/global export.png',
+    lead: 'Full EPC under one roof — Design → Supply → Erection → Commissioning — with in-house mechanical experts and procurement from 100+ trusted brands for plant-ready handover.',
+    scope: [
+      'Engineering support and design coordination',
+      'Bulk and tagged material procurement',
+      'Fabrication, logistics, and site erection',
+      'Electrical / civil interface coordination',
+      'Pre-commissioning and system flushing',
+      'Final commissioning and client handover'
+    ],
+    ideal: [
+      'Greenfield and large brownfield complexes',
+      'Owners wanting unified EPC accountability',
+      'Multi-discipline industrial facilities',
+      'Export and global project standards'
+    ],
+    tags: ['EPC', 'Commissioning', 'Design-Build', 'Global Standards']
+  },
+  'svc-05': {
+    num: '05',
+    title: 'Greenfield Project Execution',
+    image: 'image/videp/Greenfield Projects.png',
+    lead: 'Ground-up plant setup with coordinated piping, structure, electrical, and insulation workstreams — scalable execution for new manufacturing hubs from first civil tie-in to production readiness.',
+    scope: [
+      'Early-phase layout and routing studies',
+      'Multi-discipline site coordination',
+      'Bulk piping install across plant zones',
+      'Structural and equipment interface work',
+      'Insulation, tracing, and finishing',
+      'Integrated testing and startup support'
+    ],
+    ideal: [
+      'New manufacturing and process plants',
+      'Industrial parks and SEZ developments',
+      'First-time plant owners',
+      'Large-scale parallel workfront projects'
+    ],
+    tags: ['Greenfield', 'New Plants', 'Multi-Discipline', 'Scalable']
+  },
+  'svc-06': {
+    num: '06',
+    title: 'Testing & Certifications',
+    image: 'image/videp/Testing & Certifications.png',
+    lead: 'Hydro and pneumatic testing, NDT inspection, and complete certification packages — ensuring every system meets code, client spec, and regulatory compliance before go-live.',
+    scope: [
+      'Hydrostatic and pneumatic pressure tests',
+      'Leak detection and hold-point witnessing',
+      'Radiography, UT, MT, PT as applicable',
+      'Test packs, certificates, and MDRs',
+      'Third-party inspection coordination',
+      'Final QA/QC sign-off documentation'
+    ],
+    ideal: [
+      'Pre-commissioning and handover phases',
+      'Regulated industries (pharma, food, chemical)',
+      'Client and TPI witness requirements',
+      'Systems requiring code-compliant records'
+    ],
+    tags: ['Hydro Test', 'NDT', 'Certification', 'Compliance']
+  },
+  'svc-07': {
+    num: '07',
+    title: 'On-Site Consultation',
+    image: 'image/videp/On-Site Consultation.png',
+    lead: 'On-ground assessment with practical material, routing, and fitting recommendations — bridging engineering intent and field reality before capital is committed.',
+    scope: [
+      'Plant walkdowns and condition assessment',
+      'Material grade and spec recommendations',
+      'Routing feasibility and constructability review',
+      'Bill-of-material and scope estimation support',
+      'Risk identification for live-plant work',
+      'Technical advisory reports and follow-ups'
+    ],
+    ideal: [
+      'Feasibility and front-end planning stages',
+      'Troubleshooting recurring line failures',
+      'Upgrade decisions before tendering',
+      'Owners without in-house piping expertise'
+    ],
+    tags: ['Site Visit', 'Advisory', 'Feasibility', 'Technical Review']
+  },
+  'svc-08': {
+    num: '08',
+    title: 'Preventive Maintenance',
+    image: 'image/videp/Preventive Maintenance.png',
+    lead: 'Scheduled valve, pipe, and fitting care programmes that extend system life, reduce unplanned downtime, and keep critical lines operating within design parameters.',
+    scope: [
+      'Scheduled inspection and maintenance plans',
+      'Valve exercising, packing, and overhaul',
+      'Joint integrity and flange management',
+      'Corrosion and leak surveys',
+      'Spare parts and replacement planning',
+      'Maintenance logs and lifecycle tracking'
+    ],
+    ideal: [
+      'Aging piping infrastructure',
+      'Plants with high downtime costs',
+      'Critical utility and process loops',
+      'Annual shutdown maintenance windows'
+    ],
+    tags: ['Maintenance', 'Lifecycle', 'Reliability', 'Downtime Reduction']
+  },
+  'svc-09': {
+    num: '09',
+    title: 'Fabrication & Erection Solutions',
+    image: 'image/videp/prodcut image/buttweld.png',
+    lead: 'Workshop and on-site fabrication, qualified welding, and precision erection — custom spools and assemblies built to drawing with field teams ready for immediate install.',
+    scope: [
+      'Custom spool and skid fabrication',
+      'Arc, TIG, and MIG welding services',
+      'Fit-up, alignment, and tack welding',
+      'On-site erection and support structures',
+      'Dimensional checks and weld mapping',
+      'Coating / wrapping as per spec'
+    ],
+    ideal: [
+      'Custom piping assemblies and skids',
+      'Sites with limited workshop access',
+      'High-spec alloy fabrication',
+      'Erection-heavy shutdown campaigns'
+    ],
+    tags: ['Welding', 'Fabrication', 'Spools', 'Erection']
+  },
+  'svc-10': {
+    num: '10',
+    title: 'Safety & Execution Protocols',
+    image: 'image/videp/safety.png',
+    lead: 'MNC-grade safety culture with strict site protocols, audits, and permit-to-work systems — targeting zero incidents on critical industrial projects.',
+    scope: [
+      'Project-specific HSE plans and inductions',
+      'Permit-to-work and hot-work controls',
+      'Toolbox talks and safety observations',
+      'PPE compliance and site audits',
+      'Emergency response and incident reporting',
+      'Client and statutory safety alignment'
+    ],
+    ideal: [
+      'High-risk industrial environments',
+      'MNC and global client projects',
+      'Live-plant and shutdown execution',
+      'Sites requiring audited safety records'
+    ],
+    tags: ['Safety', 'MNC Standards', 'HSE', 'Zero Incident']
+  }
+};
+
+function initSvcDetails() {
+  const items = document.querySelectorAll('.svc-rect-card');
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay, 10) || 0;
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -20px 0px' }
+  );
+
+  items.forEach((item) => observer.observe(item));
+}
+
+function initSvcPortfolioRail() {
+  const wrap = document.getElementById('svc-portfolio-wrap');
+  const fill = document.getElementById('svc-portfolio-rail-fill');
+  if (!wrap || !fill) return;
+
+  const updateFill = () => {
+    const rect = wrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const start = vh * 0.85;
+    const end = vh * 0.15;
+    const total = rect.height + start - end;
+    const scrolled = start - rect.top;
+    const pct = Math.min(100, Math.max(0, (scrolled / total) * 100));
+    fill.style.height = pct + '%';
+  };
+
+  updateFill();
+  window.addEventListener('scroll', updateFill, { passive: true });
+  window.addEventListener('resize', updateFill, { passive: true });
+}
+
+function initSvcModal() {
+  const modal = document.getElementById('svc-modal');
+  const cards = document.querySelectorAll('.svc-rect-card[data-service]');
+  if (!modal || !cards.length) return;
+
+  const imgEl = document.getElementById('svc-modal-img');
+  const numEl = document.getElementById('svc-modal-num');
+  const titleEl = document.getElementById('svc-modal-title');
+  const leadEl = document.getElementById('svc-modal-lead');
+  const scopeEl = document.getElementById('svc-modal-scope');
+  const idealEl = document.getElementById('svc-modal-ideal');
+  const tagsEl = document.getElementById('svc-modal-tags');
+  const closeBtn = modal.querySelector('.svc-modal-close');
+  let activeCard = null;
+
+  const fillList = (ul, items) => {
+    ul.innerHTML = '';
+    items.forEach((text) => {
+      const li = document.createElement('li');
+      li.textContent = text;
+      ul.appendChild(li);
+    });
+  };
+
+  const fillTags = (container, tags) => {
+    container.innerHTML = '';
+    tags.forEach((text) => {
+      const span = document.createElement('span');
+      span.className = 'svc-tag';
+      span.textContent = text;
+      container.appendChild(span);
+    });
+  };
+
+  const openModal = (id, card) => {
+    const data = SVC_DETAILS[id];
+    if (!data) return;
+
+    if (activeCard) activeCard.classList.remove('is-active');
+    activeCard = card || null;
+    if (activeCard) activeCard.classList.add('is-active');
+
+    imgEl.src = data.image;
+    imgEl.alt = data.title;
+    numEl.textContent = data.num;
+    titleEl.textContent = data.title;
+    leadEl.textContent = data.lead;
+    fillList(scopeEl, data.scope);
+    fillList(idealEl, data.ideal);
+    fillTags(tagsEl, data.tags);
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (activeCard) {
+      activeCard.classList.remove('is-active');
+      activeCard = null;
+    }
+  };
+
+  cards.forEach((card) => {
+    const open = () => openModal(card.dataset.service, card);
+
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.querySelectorAll('[data-close-modal]').forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+}
+
+function initSvcHeroCarousel() {
+  const banner = document.getElementById('svc-hero');
+  const carousel = document.getElementById('svc-hero-carousel');
+  if (!carousel || !banner) return;
+
+  const slides = carousel.querySelectorAll('.svc-showcase-slide');
+  const tabs = document.querySelectorAll('#svc-banner-tabs .svc-tab');
+  const thumbs = document.querySelectorAll('#svc-thumb-strip .svc-thumb');
+  const prevBtn = banner.querySelector('.svc-showcase-prev');
+  const nextBtn = banner.querySelector('.svc-showcase-next');
+  const counter = document.getElementById('svc-showcase-counter');
+  const slideNum = document.getElementById('svc-slide-num');
+  const progressBar = document.getElementById('svc-showcase-progress');
+  const accentEl = document.getElementById('svc-banner-accent');
+  const descEl = document.getElementById('svc-banner-desc');
+
+  if (!slides.length) return;
+
+  const total = slides.length;
+  const cycleMs = 5000;
+  let current = 0;
+  let intervalId = null;
+
+  const pad = (n) => String(n).padStart(2, '0');
+
+  const updateCopy = (slide) => {
+    if (!slide) return;
+    const accent = slide.dataset.accent || slide.dataset.title || '';
+    const desc = slide.dataset.desc || '';
+
+    if (accentEl && accentEl.textContent !== accent) {
+      accentEl.textContent = accent;
+    }
+
+    if (descEl && desc !== descEl.textContent) {
+      descEl.classList.add('is-fading');
+      setTimeout(() => {
+        descEl.textContent = desc;
+        descEl.classList.remove('is-fading');
+      }, 180);
+    }
+  };
+
+  const updateUI = () => {
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+    tabs.forEach((tab, i) => tab.classList.toggle('active', i === current));
+    thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === current));
+    if (counter) counter.textContent = pad(current + 1) + ' / ' + pad(total);
+    if (slideNum) slideNum.textContent = pad(current + 1);
+    updateCopy(slides[current]);
+  };
+
+  const resetProgress = () => {
+    if (!progressBar) return;
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    progressBar.offsetHeight;
+    progressBar.style.transition = 'width ' + cycleMs + 'ms linear';
+    progressBar.style.width = '100%';
+  };
+
+  const goTo = (index) => {
+    current = ((index % total) + total) % total;
+    updateUI();
+    resetProgress();
+    restartAuto();
+  };
+
+  const next = () => goTo(current + 1);
+  const prev = () => goTo(current - 1);
+
+  const restartAuto = () => {
+    clearInterval(intervalId);
+    intervalId = setInterval(next, cycleMs);
+  };
+
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const idx = parseInt(tab.dataset.index, 10);
+      if (!Number.isNaN(idx)) goTo(idx);
+    });
+  });
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const idx = parseInt(thumb.dataset.index, 10);
+      if (!Number.isNaN(idx)) goTo(idx);
+    });
+  });
+
+  banner.addEventListener('mouseenter', () => clearInterval(intervalId));
+  banner.addEventListener('mouseleave', restartAuto);
+
+  updateUI();
+  resetProgress();
+  restartAuto();
+}
+
+/* Contact page — banner reveal */
+function initContactPage() {
+  const banner = document.querySelector('.ct-banner');
+  if (!banner) return;
+
+  const revealBanner = () => banner.classList.add('revealed');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          revealBanner();
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  observer.observe(banner);
+  if (banner.getBoundingClientRect().top < window.innerHeight) {
+    revealBanner();
+  }
+}
+
+// Product Page Carousel
+document.addEventListener('DOMContentLoaded', () => {
+  const prdBanner = document.getElementById('prd-banner-carousel');
+  if (!prdBanner) return;
+
+  const slides = prdBanner.querySelectorAll('.prd-slider-slide');
+  const dots = prdBanner.querySelectorAll('.prd-slider-dots .dot');
+  const prevBtn = prdBanner.querySelector('.prd-slider-btn.prev');
+  const nextBtn = prdBanner.querySelector('.prd-slider-btn.next');
+  const container = prdBanner.querySelector('.prd-slider-container');
+  
+  if (!slides.length) return;
+
+  let currentSlide = 0;
+  let slideInterval;
+  const slideDuration = 5000;
+
+  const showSlide = (index) => {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    
+    currentSlide = (index + slides.length) % slides.length;
+    
+    slides[currentSlide].classList.add('active');
+    if (dots[currentSlide]) {
+      dots[currentSlide].classList.add('active');
+    }
+  };
+
+  const nextSlide = () => showSlide(currentSlide + 1);
+  const prevSlide = () => showSlide(currentSlide - 1);
+
+  const startAutoSlide = () => {
+    stopAutoSlide();
+    slideInterval = setInterval(nextSlide, slideDuration);
+  };
+
+  const stopAutoSlide = () => {
+    clearInterval(slideInterval);
+  };
+
+  // Click events for buttons
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      startAutoSlide();
+    });
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      startAutoSlide();
+    });
+  }
+
+  // Click events for dots
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      showSlide(idx);
+      startAutoSlide();
+    });
+  });
+
+  // Pause on hover
+  if (container) {
+    container.addEventListener('mouseenter', stopAutoSlide);
+    container.addEventListener('mouseleave', startAutoSlide);
+  }
+
+  startAutoSlide();
+});
