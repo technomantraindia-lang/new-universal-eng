@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/style.css?v=20260630">
   <link rel="stylesheet" href="css/contact-sections.css?v=20260714">
   <link rel="icon" href="image/videp/logo.png" type="image/png">
-  <script src="js/main.js?v=20260714" defer></script>
+  <script src="js/main.js?v=20260715" defer></script>
 </head>
 <body class="contact-page-body">
 
@@ -122,30 +122,34 @@
         </div>
 
         <div class="contact-form reveal-right ct-form-panel">
-          <form class="ct-form" id="page-contact-form" action="contact-process.php" method="POST">
+          <form class="ct-form" id="page-contact-form" action="https://formsubmit.co/ut@universaltrad.com" method="POST">
+            <input type="hidden" name="_subject" value="New Website Inquiry from Universal Trad">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="thank-you.html">
             <div class="ct-form-row">
               <div class="form-group">
                 <label for="ct-name">Full Name</label>
-                <input type="text" id="ct-name" name="name" placeholder="Your name" required>
+                <input type="text" id="ct-name" name="Name" placeholder="Your name" required>
               </div>
               <div class="form-group">
                 <label for="ct-company">Company / Plant</label>
-                <input type="text" id="ct-company" name="company" placeholder="Organization name">
+                <input type="text" id="ct-company" name="Company" placeholder="Organization name">
               </div>
             </div>
             <div class="ct-form-row">
               <div class="form-group">
                 <label for="ct-phone">Phone Number</label>
-                <input type="tel" id="ct-phone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+                <input type="tel" id="ct-phone" name="Phone" placeholder="+91 XXXXX XXXXX" required>
               </div>
               <div class="form-group">
                 <label for="ct-email">Email Address</label>
-                <input type="email" id="ct-email" name="email" placeholder="you@company.com">
+                <input type="email" id="ct-email" name="Email" placeholder="you@company.com" required>
               </div>
             </div>
             <div class="form-group">
               <label for="ct-service">Service Interest</label>
-              <select id="ct-service" name="service">
+              <select id="ct-service" name="Service Interest">
                 <option value="">Select a service</option>
                 <option>Turnkey Piping Solutions</option>
                 <option>Brownfield Project Execution</option>
@@ -162,7 +166,7 @@
             </div>
             <div class="form-group">
               <label for="ct-message">Your Requirement</label>
-              <textarea id="ct-message" name="message" placeholder="Steel grades, pipe sizes, quantity, project location, timeline..."></textarea>
+              <textarea id="ct-message" name="Message" placeholder="Steel grades, pipe sizes, quantity, project location, timeline..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary ct-submit-btn">Send Inquiry &rarr;</button>
             <p class="ct-form-note">By submitting, you agree to be contacted regarding your inquiry. We respect your privacy.</p>

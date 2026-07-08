@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutHeroCarousel();
   initServicesPage();
   initContactPage();
-  initContactForm();
+  // initContactForm(); // Disabled to allow direct form submission to FormSubmit.co
 });
 
 /* Navbar scroll effect */
@@ -1222,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', () => {
   startAutoSlide();
 });
 
-/* Contact Form AJAX submission with SMTP endpoint */
+/* Contact Form AJAX submission with SMTP endpoint — Disabled for FormSubmit.co
 function initContactForm() {
   const forms = document.querySelectorAll('#home-contact-form, #page-contact-form');
   forms.forEach(form => {
@@ -1270,3 +1270,4 @@ function initContactForm() {
     });
   });
 }
+*/
