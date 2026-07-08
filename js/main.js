@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutHeroCarousel();
   initServicesPage();
   initContactPage();
+  initContactForm();
 });
 
 /* Navbar scroll effect */
@@ -1220,3 +1221,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startAutoSlide();
 });
+
+/* Contact Form AJAX submission with SMTP endpoint */
+function initContactForm() {
+  const forms = document.querySelectorAll('#home-contact-form, #page-contact-form');
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Inquiry';
+      
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+      }
+
+      const formData = new FormData(form);
+
+      fetch(form.action || 'contact-process.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.status === 'success') {
+          alert(data.message || 'Thank you! Your message has been sent successfully.');
+          form.reset();
+        } else {
+          alert(data.message || 'Sorry, there was an error sending your message. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error submitting form:', error);
+        alert('Sorry, there was an error sending your message. Please check your internet connection and try again.');
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      });
+    });
+  });
+}
