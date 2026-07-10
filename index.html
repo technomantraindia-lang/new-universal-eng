@@ -47,10 +47,11 @@
   <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-bg">
-      <video autoplay loop muted playsinline class="hero-video">
-        <source src="image/videp/Untitled design most final bnner.mp4" type="video/mp4">
+      <video autoplay loop muted playsinline preload="none" class="hero-video" data-lazy-video data-start-time="3">
+        <source data-src="image/videp/most Untitled design most final bnner.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+      <div class="video-fallback hero-fallback" aria-hidden="true"></div>
     </div>
     <div class="hero-scroll">
       <div class="mouse"></div>

@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
+  initLazyVideos();
   initReveal();
   initCounters();
   initTabs();
@@ -18,8 +19,91 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutHeroCarousel();
   initServicesPage();
   initContactPage();
+  initQuoteModal();
   // initContactForm(); // Disabled to allow direct form submission to FormSubmit.co
 });
+
+/* Lazy-load hero videos so the first page render is lighter */
+function initLazyVideos() {
+  const videos = document.querySelectorAll('video[data-lazy-video]');
+  if (!videos.length) return;
+
+  const loadVideo = (video) => {
+    if (video.dataset.loaded === 'true') return;
+
+    const sources = video.querySelectorAll('source[data-src]');
+    sources.forEach((source) => {
+      source.src = source.dataset.src || '';
+      source.removeAttribute('data-src');
+    });
+
+    video.dataset.loaded = 'true';
+    video.load();
+
+    const startTime = parseFloat(video.dataset.startTime || '0');
+    if (startTime > 0) {
+      const applyStartTime = () => {
+        if (video.duration && startTime >= video.duration) return;
+        if (video.currentTime < startTime) {
+          video.currentTime = startTime;
+        }
+      };
+
+      if (video.readyState >= 1) {
+        applyStartTime();
+      } else {
+        video.addEventListener('loadedmetadata', applyStartTime, { once: true });
+      }
+
+      video.addEventListener('timeupdate', applyStartTime);
+      video.addEventListener('seeking', applyStartTime);
+    }
+
+    if (video.hasAttribute('autoplay')) {
+      const playVideo = () => video.play().catch(() => {});
+
+      if (video.readyState >= 2) {
+        playVideo();
+      } else {
+        video.addEventListener('loadeddata', playVideo, { once: true });
+      }
+    }
+  };
+
+  const markReady = (video) => {
+    video.classList.add('is-ready');
+  };
+
+  const deferLoad = (video) => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => loadVideo(video), { timeout: 1500 });
+      return;
+    }
+
+    window.setTimeout(() => loadVideo(video), 250);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        deferLoad(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: '200px 0px' }
+  );
+
+  videos.forEach((video) => {
+    video.addEventListener('loadeddata', () => markReady(video), { once: true });
+
+    if (video.readyState >= 2) {
+      markReady(video);
+    }
+
+    observer.observe(video);
+  });
+}
 
 /* Navbar scroll effect */
 function initNavbar() {
@@ -217,6 +301,113 @@ function initSmoothScroll() {
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     });
+  });
+}
+
+/* Shared quote modal used by the header CTA */
+function initQuoteModal() {
+  const triggerSelector = '.navbar .btn-primary[href="contact.html"], .navbar .btn-primary[href="#contact-form"]';
+  const triggers = document.querySelectorAll(triggerSelector);
+  if (!triggers.length) return;
+
+  let modal = document.getElementById('quote-modal');
+  if (!modal) {
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="modal quote-modal" id="quote-modal" aria-hidden="true">
+        <div class="modal-overlay" data-close-quote-modal></div>
+        <div class="modal-content quote-modal-content" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
+          <button class="modal-close" type="button" aria-label="Close quote form">&times;</button>
+          <div class="quote-modal-header">
+            <span class="section-label">Get Quote</span>
+            <h3 id="quote-modal-title">Tell Us About Your Project</h3>
+            <p>Share your requirement and our team will get back to you with the right solution.</p>
+          </div>
+          <form class="quote-form" id="quote-modal-form" action="https://formsubmit.co/ut@universaltrad.com" method="POST">
+            <input type="hidden" name="_subject" value="New Website Inquiry from Universal Trad">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="thank-you.html">
+            <div class="quote-form-row">
+              <div class="form-group">
+                <label for="quote-name">Full Name</label>
+                <input type="text" id="quote-name" name="Name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="quote-company">Company / Plant</label>
+                <input type="text" id="quote-company" name="Company" placeholder="Organization name">
+              </div>
+            </div>
+            <div class="quote-form-row">
+              <div class="form-group">
+                <label for="quote-phone">Phone Number</label>
+                <input type="tel" id="quote-phone" name="Phone" placeholder="+91 XXXXX XXXXX" required>
+              </div>
+              <div class="form-group">
+                <label for="quote-email">Email Address</label>
+                <input type="email" id="quote-email" name="Email" placeholder="you@company.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quote-service">Service Interest</label>
+              <select id="quote-service" name="Service Interest">
+                <option value="">Select a service</option>
+                <option>Turnkey Piping Solutions</option>
+                <option>Brownfield Project Execution</option>
+                <option>Piping Project Execution</option>
+                <option>360&deg; Piping EPC Services</option>
+                <option>Greenfield Project Execution</option>
+                <option>Testing &amp; Certifications</option>
+                <option>On-Site Consultation</option>
+                <option>Preventive Maintenance</option>
+                <option>Fabrication &amp; Erection</option>
+                <option>Material Supply / Products</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quote-message">Your Requirement</label>
+              <textarea id="quote-message" name="Message" placeholder="Steel grades, pipe sizes, quantity, project location, timeline..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary quote-submit-btn">Send Inquiry &rarr;</button>
+            <p class="quote-form-note">By submitting, you agree to be contacted regarding your inquiry. We respect your privacy.</p>
+          </form>
+        </div>
+      </div>
+    `);
+    modal = document.getElementById('quote-modal');
+  }
+
+  const closeBtn = modal.querySelector('.modal-close');
+  const overlay = modal.querySelector('[data-close-quote-modal]');
+  const firstInput = modal.querySelector('input, textarea, select');
+
+  const openModal = () => {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    window.setTimeout(() => firstInput?.focus(), 100);
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
   });
 }
 

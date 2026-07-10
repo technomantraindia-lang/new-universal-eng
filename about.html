@@ -51,9 +51,10 @@
   <!-- About Hero -->
   <section class="about-hero">
     <div class="about-hero-bg">
-      <video autoplay loop muted playsinline class="about-hero-video" aria-hidden="true">
-        <source src="image/videp/final banner.mp4" type="video/mp4">
+      <video autoplay loop muted playsinline preload="none" class="about-hero-video" aria-hidden="true" data-lazy-video>
+        <source data-src="image/videp/final banner.mp4" type="video/mp4">
       </video>
+      <div class="video-fallback about-hero-fallback" aria-hidden="true"></div>
       <div class="about-hero-bg-shade" aria-hidden="true"></div>
     </div>
     <div class="about-hero-overlay"></div>
