@@ -793,3 +793,39 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow by forcing single column grids on mobile */
+  .prd-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin-top: 30px !important;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    margin-top: 30px !important;
+  }
+
+  .prd-catalog {
+    padding: 40px 0 60px !important;
+  }
+
+  /* Make category page banners look clean and compact on mobile */
+  .prd-hero-banner {
+    padding: 120px 0 40px !important;
+  }
+
+  .prd-hero-banner h1 {
+    font-size: 2rem !important;
+    margin-bottom: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .prd-hero-banner p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    padding: 0 16px;
+  }
+}

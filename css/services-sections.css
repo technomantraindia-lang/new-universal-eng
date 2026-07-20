@@ -628,8 +628,42 @@
 }
 
 @media (max-width: 768px) {
+  .svc-banner-shell {
+    padding-top: 80px !important;
+  }
+
   .svc-banner-stage {
-    min-height: 46vh;
+    min-height: 40vh !important;
+  }
+
+  .svc-banner-aside {
+    padding: 24px 16px !important;
+  }
+
+  .svc-banner-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 100% !important;
+  }
+
+  .svc-banner-title {
+    font-size: 2rem !important;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .svc-banner-desc {
+    font-size: 0.95rem !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+    max-width: 100% !important;
+  }
+
+  .svc-banner-actions {
+    justify-content: center !important;
+    width: 100%;
   }
 
   .svc-banner-meta {

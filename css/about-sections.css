@@ -314,12 +314,51 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .about-page-body .about-hero {
-    min-height: auto;
-    padding: 100px 0 64px;
+    min-height: auto !important;
+    padding: 120px 0 60px !important;
   }
 
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px !important;
+  }
+
+  .about-page-body .about-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-page-body .about-hero-title {
+    font-size: 2.2rem !important;
+    text-align: center;
+    line-height: 1.15;
+  }
+
+  .about-page-body .about-hero-subtitle {
+    font-size: 1rem !important;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+
+  .about-hero-badges {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hero-product-panel {
+    max-width: 100% !important;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
   .about-hero-accent-line {
     display: none;
   }
