@@ -662,6 +662,10 @@
     text-align: center;
   }
 
+  .svc-banner-title br {
+    display: none !important;
+  }
+
   .svc-banner-desc {
     font-size: 0.95rem !important;
     margin-bottom: 20px !important;
