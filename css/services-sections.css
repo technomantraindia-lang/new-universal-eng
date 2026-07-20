@@ -628,15 +628,23 @@
 }
 
 @media (max-width: 768px) {
+  .svc-banner {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
   .svc-banner-shell {
     padding-top: 80px !important;
+    min-height: auto !important;
   }
 
   .svc-banner-stage {
-    min-height: 40vh !important;
+    order: 2 !important;
+    min-height: 35vh !important;
   }
 
   .svc-banner-aside {
+    order: 1 !important;
     padding: 24px 16px !important;
   }
 

@@ -330,20 +330,38 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 30px 20px !important;
+    transform: none !important;
+    transform-style: flat !important;
+    background: rgba(16, 16, 16, 0.8) !important;
+    border: 1px solid rgba(226, 7, 20, 0.25) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .about-page-body .about-hero-title,
+  .about-page-body .about-hero-subtitle,
+  .about-page-body .about-hero-badges {
+    transform: none !important;
   }
 
   .about-page-body .about-hero-title {
-    font-size: 2.2rem !important;
+    font-size: 2rem !important;
     text-align: center;
     line-height: 1.15;
+    margin-top: 0 !important;
   }
 
   .about-page-body .about-hero-subtitle {
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+    margin-bottom: 20px !important;
   }
 
   .about-hero-badges {
