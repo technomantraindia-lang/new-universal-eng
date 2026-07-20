@@ -6,6 +6,174 @@
   background: var(--black);
 }
 
+/* Polished service banner for phones and small tablets. */
+@media (max-width: 768px) {
+  .services-page-body .svc-banner {
+    min-height: 0 !important;
+    overflow: hidden;
+    background: #090909;
+  }
+
+  .services-page-body .svc-banner-shell {
+    display: flex !important;
+    flex-direction: column;
+    padding-top: calc(82px + env(safe-area-inset-top)) !important;
+  }
+
+  .services-page-body .svc-banner-aside {
+    order: 1 !important;
+    padding: 28px clamp(15px, 4.5vw, 24px) 24px !important;
+  }
+
+  .svc-banner-bg {
+    background:
+      radial-gradient(circle at 50% 10%, rgba(226, 7, 20, 0.12), transparent 46%),
+      linear-gradient(180deg, #0b0b0b, #090909);
+  }
+
+  .svc-banner-accent-bar {
+    display: none;
+  }
+
+  .services-page-body .svc-banner-copy {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .svc-banner-copy .section-label {
+    margin-bottom: 16px;
+    font-size: clamp(0.62rem, 2.8vw, 0.72rem);
+    letter-spacing: clamp(2px, 0.8vw, 3px);
+  }
+
+  .services-page-body .svc-banner-title {
+    max-width: 15ch;
+    margin-bottom: 16px;
+    font-size: clamp(1.8rem, 8vw, 2.35rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .services-page-body .svc-banner-title br {
+    display: block !important;
+  }
+
+  .services-page-body .svc-banner-desc {
+    max-width: 40ch !important;
+    margin-bottom: 22px !important;
+    font-size: clamp(0.86rem, 3.65vw, 0.98rem) !important;
+    line-height: 1.58;
+    text-wrap: balance;
+  }
+
+  .services-page-body .svc-banner-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 430px;
+    margin-bottom: 22px;
+  }
+
+  .services-page-body .svc-banner-actions .btn {
+    min-width: 0;
+    min-height: 46px;
+    padding: 12px 10px;
+    font-size: clamp(0.72rem, 3vw, 0.84rem);
+    white-space: normal;
+  }
+
+  .services-page-body .svc-thumb-strip {
+    width: calc(100vw - 30px);
+    max-width: 430px;
+    margin-top: 0;
+    padding: 14px 2px 4px;
+    gap: 8px;
+    scroll-snap-type: x proximity;
+  }
+
+  .services-page-body .svc-thumb {
+    width: 62px;
+    height: 46px;
+    border-radius: 8px;
+    scroll-snap-align: center;
+  }
+
+  .services-page-body .svc-banner-stage {
+    order: 2 !important;
+    width: calc(100% - 30px);
+    min-height: clamp(240px, 66vw, 360px) !important;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    clip-path: none;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+  }
+
+  .svc-slide-media {
+    inset: 0;
+  }
+
+  .svc-slide-media img {
+    object-position: center 30%;
+  }
+
+  .svc-stage-shade {
+    background: linear-gradient(180deg, transparent 48%, rgba(7, 7, 7, 0.72) 100%);
+  }
+
+  .services-page-body .svc-banner-controls {
+    right: 12px;
+    bottom: 12px;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .svc-showcase-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .svc-showcase-counter {
+    min-width: 50px;
+    font-size: 0.66rem;
+  }
+
+  .services-page-body .svc-showcase-progress {
+    margin-top: 18px;
+  }
+
+  .services-page-body .svc-banner-tabs {
+    padding-bottom: env(safe-area-inset-bottom);
+    scroll-snap-type: x proximity;
+  }
+
+  .services-page-body .svc-tab {
+    min-width: 112px;
+    padding: 14px 12px;
+    font-size: 0.66rem;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 380px) {
+  .services-page-body .svc-banner-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page-body .svc-banner-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-showcase-slide.active .svc-slide-media img {
+    animation: none;
+  }
+}
+
 /* ---- Premium Service Banner ---- */
 .svc-banner {
   position: relative;

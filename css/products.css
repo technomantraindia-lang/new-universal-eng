@@ -6,6 +6,152 @@
   background: var(--black);
 }
 
+/* Polished product banner for phones and small tablets. */
+@media (max-width: 768px) {
+  .products-page-body .prd-banner {
+    min-height: 0;
+    padding: calc(82px + env(safe-area-inset-top)) 0 38px;
+    background:
+      radial-gradient(circle at 50% 60%, rgba(226, 7, 20, 0.1), transparent 48%),
+      #090909;
+  }
+
+  .products-page-body .prd-carousel-overlay {
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.18), rgba(8, 8, 8, 0.82));
+  }
+
+  .products-page-body .prd-banner-grid-bg {
+    background-size: 36px 36px;
+    opacity: 0.6;
+  }
+
+  .products-page-body .prd-banner-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    width: 100%;
+    padding: 26px clamp(15px, 4.5vw, 24px) 0;
+  }
+
+  .products-page-body .prd-banner-content {
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+  }
+
+  .prd-banner-content .section-label {
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: clamp(0.62rem, 2.8vw, 0.72rem);
+    letter-spacing: clamp(2px, 0.8vw, 3px);
+  }
+
+  .products-page-body .prd-banner-title {
+    max-width: 15ch;
+    margin-bottom: 17px;
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .products-page-body .prd-banner-desc {
+    max-width: 42ch;
+    margin: 0 auto 22px;
+    font-size: clamp(0.86rem, 3.65vw, 0.98rem);
+    line-height: 1.58;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .products-page-body .prd-banner-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 430px;
+  }
+
+  .products-page-body .prd-banner-actions .btn {
+    min-width: 0;
+    min-height: 46px;
+    padding: 12px 10px;
+    font-size: clamp(0.72rem, 3vw, 0.84rem);
+    white-space: normal;
+  }
+
+  .products-page-body .prd-banner-visual {
+    min-width: 0;
+    padding-top: 4px;
+  }
+
+  .products-page-body .prd-slider-container {
+    max-width: 430px;
+  }
+
+  .products-page-body .prd-slider-wrapper {
+    height: clamp(255px, 72vw, 330px);
+  }
+
+  .products-page-body .prd-slider-img-wrap {
+    min-height: 0;
+    padding: 0 10px 6px;
+  }
+
+  .products-page-body .prd-slider-img-wrap img {
+    max-width: min(88vw, 390px);
+    max-height: clamp(175px, 50vw, 230px);
+    filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.72));
+  }
+
+  .products-page-body .prd-slider-slide::before {
+    width: min(78vw, 310px);
+    height: min(78vw, 310px);
+    filter: blur(70px);
+  }
+
+  .products-page-body .prd-slider-info {
+    padding-top: 8px;
+  }
+
+  .products-page-body .prd-slider-badge {
+    margin-bottom: 6px;
+    font-size: 0.64rem;
+  }
+
+  .products-page-body .prd-slider-name {
+    font-size: clamp(1.25rem, 5.5vw, 1.6rem);
+  }
+
+  .products-page-body .prd-slider-controls {
+    gap: 18px;
+    margin-top: 10px;
+  }
+
+  .products-page-body .prd-slider-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 380px) {
+  .products-page-body .prd-banner-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .products-page-body .prd-banner-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prd-slider-slide.active,
+  .prd-slider-slide.active::before,
+  .prd-slider-slide.active .prd-slider-img-wrap img {
+    animation: none;
+  }
+}
+
 /* ---- Products Banner ---- */
 /* ---- Products Banner ---- */
 .prd-banner {
